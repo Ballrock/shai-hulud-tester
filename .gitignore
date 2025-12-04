@@ -1,0 +1,22 @@
+# Temporary files
+tmp/
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local data
+datadog-iocs.csv
+rawlist.txt
+
+# Generated data (created by GitHub Actions)
+data/compromised-packages.json

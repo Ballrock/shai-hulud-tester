@@ -1,0 +1,16 @@
+{
+  "name": "shai-hulud-tester",
+  "version": "1.0.0",
+  "description": "Détecteur de packages npm compromis - Attaque Shai Hulud 2.0",
+  "scripts": {
+    "test": "node --test",
+    "test:unit": "node --test test/unit/**/*.test.js",
+    "test:e2e": "node --test test/e2e/**/*.test.js",
+    "update-data": "node convert-list.js",
+    "serve": "python3 -m http.server 8080"
+  },
+  "keywords": ["security", "npm", "supply-chain", "shai-hulud"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {}
+}

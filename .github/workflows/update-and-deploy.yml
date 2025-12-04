@@ -1,0 +1,81 @@
+name: Update Compromised Packages and Deploy
+
+on:
+  schedule:
+    # Exécution tous les jours à 2h00 UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Permet l'exécution manuelle
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  checks: write
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Update compromised packages
+        run: |
+          echo "📥 Downloading and updating compromised packages..."
+          node convert-list.js
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run tests
+        run: |
+          echo "🧪 Running tests..."
+          npm test -- --test-reporter=junit --test-reporter-destination=junit.xml || true
+          npm test
+      
+      - name: Publish test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: junit.xml
+          reporter: java-junit
+          fail-on-error: true
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet data/compromised-packages.json || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Display update info
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          echo "📊 Data has been updated!" >> $GITHUB_STEP_SUMMARY
+          echo "New packages detected or versions modified" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Setup Pages
+        if: steps.check_changes.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        if: steps.check_changes.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        if: steps.check_changes.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        id: deployment
+        uses: actions/deploy-pages@v4
+      

@@ -1,0 +1,26 @@
+{
+  "name": "safe-project",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "safe-project",
+      "version": "1.0.0",
+      "dependencies": {
+        "express": "4.18.2",
+        "react": "18.2.0",
+        "lodash": "4.17.21"
+      }
+    },
+    "node_modules/express": {
+      "version": "4.18.2"
+    },
+    "node_modules/react": {
+      "version": "18.2.0"
+    },
+    "node_modules/lodash": {
+      "version": "4.17.21"
+    }
+  }
+}

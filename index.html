@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package-Lock Security Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 Package-Lock Security Analyzer</h1>
+            <p class="subtitle">Check if your dependencies are compromised</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="upload-box">
+                    <input type="file" id="fileInput" accept=".json,application/json" />
+                    <label for="fileInput" class="upload-label">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <span>Click to select your package-lock.json</span>
+                        <span class="file-info">or drag and drop the file here</span>
+                    </label>
+                </div>
+                
+                <div class="paste-section">
+                    <h3>Or paste your package-lock.json here:</h3>
+                    <textarea id="pasteArea" placeholder="Paste your package-lock.json content here..."></textarea>
+                    <button id="analyzeButton" class="analyze-btn">🔍 Analyze</button>
+                </div>
+            </section>
+
+            <section class="info-section" id="infoSection">
+                <div class="info-card">
+                    <h3>📦 Known Compromised Packages</h3>
+                    <p id="compromisedCount">Loading...</p>
+                    <p id="lastUpdate" class="small-text">Last update: -</p>
+                </div>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Analysis Results</h2>
+                
+                <div class="summary-cards">
+                    <div class="summary-card safe">
+                        <h3 id="safeCount">0</h3>
+                        <p>Safe Packages</p>
+                    </div>
+                    <div class="summary-card warning">
+                        <h3 id="warningCount">0</h3>
+                        <p>Warnings</p>
+                    </div>
+                    <div class="summary-card danger">
+                        <h3 id="dangerCount">0</h3>
+                        <p>Threats Detected</p>
+                    </div>
+                </div>
+
+                <div id="threatsContainer" class="threats-container"></div>
+                
+                <div id="detailsContainer" class="details-container"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Data based on <a href="https://github.com/DataDog/indicators-of-compromise/blob/main/shai-hulud-2.0/consolidated_iocs.csv" target="_blank">DataDog Indicators of Compromise - Shai Hulud 2.0</a></p>
+            <p class="footer-date" id="footerDate">Last data update: -</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

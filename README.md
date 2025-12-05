@@ -1,5 +1,7 @@
 # Package-Lock Security Analyzer - Shai Hulud 2.0
 
+[![Open on GitHub Pages](https://img.shields.io/badge/Open%20on-GitHub%20Pages-%2334c759?logo=github)](https://ballrock.github.io/shai-hulud-tester/)
+
 Web tool to detect compromised npm packages from the **Shai Hulud 2.0** attack in your `package-lock.json`.
 
 ## Alert Levels
@@ -11,7 +13,7 @@ Web tool to detect compromised npm packages from the **Shai Hulud 2.0** attack i
 ## Usage
 
 ### Online (GitHub Pages)
-Visit: `https://Ballrock.github.io/shai-hulud-tester/`
+Visit: [https://ballrock.github.io/shai-hulud-tester/](https://ballrock.github.io/shai-hulud-tester/)
 
 ### Locally
 1. Start a local HTTP server:

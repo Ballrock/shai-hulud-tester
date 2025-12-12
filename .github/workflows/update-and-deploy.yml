@@ -3,7 +3,7 @@ name: Update Compromised Packages and Deploy
 on:
   schedule:
     # Exécution tous les jours à 2h00 UTC
-    - cron: '0 2 * * *'
+    - cron: '0 2 */7 * *'
   workflow_dispatch: # Permet l'exécution manuelle
   push:
     branches:
